@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <label>x</label>
+    <input id="num-x" type="number" />
+
+    <label>y</label>
+     <input id="num-y" type="number" />
+
+     <label>Bakrunnsfarge</label>
+     <select id="farge">
+        <option value="Velg farge">Velg farge</option>
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="gray">Gray</option>
+     </select>
+
+      <label>Forgrunnsfarge</label>
+     <select id="forgrunns-farge">
+        <option value="Velg farge">Velg farge</option>
+        <option value="yellow">Yellow</option>
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="gray">Gray</option>
+     </select>
+
+    <button onclick="addCircleFromInput()">Legg til sirkel</button>
+    <button onclick="addRectangle()">Legg til rektangulær</button>
+  
+<br/>
+<svg 
+  id="mySvg"
+  width="800" 
+  height="600" 
+  style="background-color: lightgray;">
+</svg>
+
+
+
+
+<script>
+  function addCircle(x,y,farge,innerfarge) {       
+    
+      document.getElementById('mySvg').innerHTML = /*HTML*/`
+          <circle cx="${x}" cy="${y}" r="40" stroke="green" stroke-width="4" fill="${innerfarge}" />            
+      `;
+  }
+
+  function addRectangle() {
+    document.getElementById('mySvg').innerHTML = 
+    <rect width="200" height="100" x="10" y="10" rx="20" ry="20" fill="blue" />
+  }
+
+  function addCircleFromInput() {
+    const tallX = Number(document.getElementById('num-x').value);
+    const tallY = Number(document.getElementById('num-y').value);
+    const farge = document.getElementById('farge').value;
+    const forgrunnsFarge = document.getElementById('forgrunns-farge').value;
+
+    document.getElementById('mySvg').style.backgroundColor = farge;
+
+        addCircle(tallX, tallY,farge,forgrunnsFarge)
+  }
+</script>
+</body>
+</html>

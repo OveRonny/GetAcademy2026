@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  
+
+    header {
+        background-color: black;
+        color: white;
+        text-align: center;        
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1;
+    }
+
+    .page {       
+        display: flex;  
+        height: 100%;        
+    }
+
+    .hovedinnhold {
+        background-color: grey;
+        flex:  3;
+    }
+
+    .menu {
+        background-color: yellow;
+        grid-area: menu;
+        flex: 1;
+    }
+
+    footer {
+        background-color: black;
+        color: white;
+        text-align: center;      
+       
+    }
+
+    @media (max-width: 768px) {
+    .page {
+        flex-direction: column;
+    }
+
+    .menu {
+        order: -1;  
+    }
+}
+
+</style>
+<body>
+    <header>
+        <h1>Header</h1>
+    </header>
+    <main>
+        <div class="page">
+            <div class="menu">
+                <h2>Menu</h2>
+            </div>
+            <div class="hovedinnhold">
+                <h2>Hovedinnhold</h2>
+            </div>           
+        </div>
+    </main>
+    <footer>
+        <h3>Footer</h3>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="inside"></div>
+
+    <script>
+        function goInside() {
+            document.getElementById('inside').innerHTML = `
+            <p>Du er i gangen.</p>
+            <button onclick="goOutside()">Gå ut</button>
+            <button onclick="goToBathRoom()">Gå til badet</button>
+            <button onclick="goToLivingRoom()">Gå til stua</button>
+            <button onclick="goToKitchen()">Gå til kjøkkenet</button>
+            `;
+
+        }
+
+        function goOutside() {
+            document.getElementById('inside').innerHTML = `
+            <p>Du er utenfor en leilighet.</p>
+            <button onclick="goInside()">Gå inn</button>
+            `;
+        }
+
+        function goToLivingRoom() {
+            document.getElementById('inside').innerHTML = `
+            <p>Du er inn i stua.</p>
+            <button onclick="goToKitchen()">Gå til kjøkkenet</button>
+            <button onclick="goInside()">Gå inn til gangen</button>
+            `;
+        }
+
+        function goToBathRoom() {
+            document.getElementById('inside').innerHTML = `
+            <p>Du er på badet.</p>
+            <button onclick="goInside()">Gå inn til gangen</button>
+            `;
+        }
+
+        function goToKitchen() {
+            document.getElementById('inside').innerHTML = `
+            <p>Du er på kjøkkenet.</p>
+            <button onclick="goToLivingRoom()">Gå til stua</button>
+            <button onclick="goInside()">Gå inn til gangen</button>
+            `;
+        }
+
+       
+
+
+    </script>
+
+    <script>
+        goOutside();
+    </script>
+
+    
+
+</body>
+</html>

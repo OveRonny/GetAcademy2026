@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+    .form {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 10px 30px;
+        max-width: 500px;
+        font-size: 24px;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>Mitt skjema</h3>
+
+        <form class="form">
+            <label>First Name</label>
+            <input type="text"> 
+
+            <label> Last Name</label>
+            <input type="text">
+
+            <label>En til hundre</label>
+            <input type="range">
+
+            <label>Skriv inn et tall</label>
+            <input type="number">
+
+            <label>Favorittspråk:</label>    
+           
+          
+            <div>
+                <label for="html">HTML</label>
+                <input type="radio" id="html" name="fav_language">
+
+                <label for="css">CSS</label>
+                <input type="radio" id="css" name="fav_language">
+
+                <label for="js">JavaScript</label>
+                <input type="radio" id="js" name="fav_language">
+            </div>
+        </form>
+    </div> 
+</body>
+</html>

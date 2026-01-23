@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.page {
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            grid-template-rows: 20px 10fr 20px;
+            grid-template-areas:  'header header' 'menu hovedinnhold' 'footer footer';
+            
+        }
+
+        body {
+            margin: 0;
+        }
+
+        div.header {
+            background-color: lightgray ;
+            grid-area: header;
+        }
+
+        div.menu 
+        {
+            background-color:  lightblue;
+            grid-area: menu;
+        }
+
+        div.hovedinnhold {
+            background-color: lightgreen ;
+            grid-area: hovedinnhold;
+        }
+
+        div.footer {
+            background-color: lightpink;
+            grid-area: footer;
+        }
+
+        @media only screen  and (max-width: 600px){
+                div.page {
+                height: 100vh;
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: 20px 1fr 4fr 20px;
+                grid-template-areas:  'header' 'menu' 'hovedinnhold' 'footer';
+            
+            }
+
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="header">header</div>
+        <div class="menu">meny</div>
+        <div class="hovedinnhold">hovedinnhold</div>
+        <div class="footer">footer</div>
+    </div>
+</body>
+</html>
