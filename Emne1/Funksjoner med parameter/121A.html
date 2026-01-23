@@ -41,7 +41,12 @@
   height="600" 
   style="background-color: lightgray;">
 </svg>
-
+<svg
+  id="mySvg2"
+  width="800"
+  height="500"
+  style="background-color: black;">
+</svg>
 
 
 
@@ -54,8 +59,9 @@
   }
 
   function addRectangle() {
-    document.getElementById('mySvg').innerHTML = 
+    document.getElementById('mySvg2').innerHTML = `
     <rect width="200" height="100" x="10" y="10" rx="20" ry="20" fill="blue" />
+    `;
   }
 
   function addCircleFromInput() {
