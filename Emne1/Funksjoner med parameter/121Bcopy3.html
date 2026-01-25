@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+        }
+
+        th,
+        td {
+            border: 1px solid #999;
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tbody tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+
+<body>
+    <table id="myTable"></table>
+
+    <script>
+
+        async function fetchDataAndBuildTable() {
+            try {
+                const cached = getCachedData("tableData", 30); // 30 sek TTL
+                if (cached) {
+                    createTableFromData(cached, "myTable");
+                    return;
+                }
+
+                console.log("Henter fra JSON");
+                const response = await fetch("data.json");
+                if (!response.ok) throw new Error("Kunne ikke hente JSON");
+
+                const data = await response.json();
+                cacheData("tableData", data);
+
+                createTableFromData(data, "myTable");
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        function cacheData(key, data) {
+            const payload = {
+                timestamp: Date.now(),
+                data
+            };
+            sessionStorage.setItem(key, JSON.stringify(payload));
+        }
+
+        function getCachedData(key, maxAgeSeconds = 30) {
+            const cached = sessionStorage.getItem(key);
+            if (!cached) {
+                console.log("❌ Ingen cache");
+                return null;
+            }
+
+            const { timestamp, data } = JSON.parse(cached);
+            const ageSeconds = (Date.now() - timestamp) / 1000;
+
+            console.log(`Cache alder: ${ageSeconds.toFixed(1)} sek`);
+
+            if (ageSeconds > maxAgeSeconds) {
+                console.log("Cache utløpt");
+                sessionStorage.removeItem(key);
+                return null;
+            }
+
+            console.log("✅ Bruker cache");
+            return data;
+        }
+
+
+        function createTableFromData(data, tableId) {
+            if (!data || data.length === 0) return;
+
+            const table = document.getElementById(tableId);
+            table.innerHTML = "";
+
+            // Header
+            const thead = document.createElement("thead");
+            const headerRow = table.insertRow();
+            Object.keys(data[0]).forEach(key => {
+                const th = document.createElement("th");
+                th.textContent = key;
+                headerRow.appendChild(th);
+            });
+
+            // Body
+            const tbody = document.createElement("tbody");
+            data.forEach(rowData => {
+                const row = document.createElement("tr");
+                Object.values(rowData).forEach(value => {
+                    const td = document.createElement("td");
+                    td.textContent = value;
+                    row.appendChild(td);
+                });
+                tbody.appendChild(row);
+            });
+            table.appendChild(tbody);
+        }
+
+        fetchDataAndBuildTable();
+
+    </script>
+</body>
+
+</html>

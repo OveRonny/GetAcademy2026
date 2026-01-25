@@ -1,0 +1,7 @@
+[
+  { "Dag": "Mandag", "Time": 10, "Minutt": 0, "Temperatur": "5°C" },
+  { "Dag": "Tirsdag", "Time": 10, "Minutt": 15, "Temperatur": "6°C" },
+  { "Dag": "Onsdag", "Time": 12, "Minutt": 0, "Temperatur": "8°C" },
+  { "Dag": "Torsdag", "Time": 7, "Minutt": 30, "Temperatur": "15°C" },
+  { "Dag": "Fredag", "Time": 3, "Minutt": 15, "Temperatur": "2°C" }
+]

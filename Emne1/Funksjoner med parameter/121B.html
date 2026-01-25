@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="myTable"></table>
+   
+    <script>
+
+        createRow("th", "Dag", "Time", "Minutt", "Temperatur");
+        createRow("td", 1, 10, 0, 5);
+        createRow("td", 1, 10, 15, 6);
+        createRow("td", 1, 10, 30, 7);
+
+        function createRow(tag, col1, col2, col3, col4) {
+            document.getElementById('myTable').innerHTML += /*HTML*/`
+                <tr>                    
+                    <${tag}>${col1}</${tag}>
+                    <${tag}>${col2}</${tag}>
+                    <${tag}>${col3}</${tag}>
+                    <${tag}>${col4}</${tag}>
+                </tr>
+            `;
+        }
+
+    </script>
+
+</body>
+
+</html>
