@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form</title>
+    <style>
+        .form-group {
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+        }
+
+        .form-group-inline {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group-inline label {
+            margin-left: 0.25rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+
+        const form = document.createElement('form');
+        form.action = 'submit';
+        form.method = 'post';
+
+        function createInput(type, id, labelText, attributes = {}) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'form-group';
+
+            const label = document.createElement('label');
+            label.htmlFor = id;
+            label.textContent = labelText;
+
+            const input = document.createElement('input');
+            input.type = type;
+            input.id = id;
+
+            for (const key in attributes) {
+                input[key] = attributes[key];
+            }
+
+            wrapper.appendChild(label);
+            wrapper.appendChild(input);
+            form.appendChild(wrapper);
+            return input;
+        }
+
+        const errorDiv = document.createElement('div');
+        errorDiv.id = 'errors';
+        form.appendChild(errorDiv);
+
+        const fnameInput = createInput('text', 'fname', 'First name:', { required: true });
+        const lnameInput = createInput('text', 'lname', 'Last name:', { required: true });
+
+        const rangeInput = createInput('range', 'zero2hundred', 'En til hundre:', { min: 1, max: 100, step: 1 });
+
+        const numberInput = createInput('number', 'number', 'Skriv inn et tall:');
+
+        function createRadio(id, name, labelText) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'form-group-inline';
+
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.id = id;
+            input.name = name;
+            input.value = labelText;
+
+            const label = document.createElement('label');
+            label.htmlFor = id;
+            label.textContent = labelText;
+
+            wrapper.appendChild(input);
+            wrapper.appendChild(label);
+            form.appendChild(wrapper);
+        }
+
+        createRadio('html', 'fav_language', 'HTML');
+        createRadio('css', 'fav_language', 'CSS');
+        createRadio('javascript', 'fav_language', 'JavaScript');
+
+        function createCheckbox(id, valueText) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'form-group-inline';
+
+            const input = document.createElement('input');
+            input.type = 'checkbox';
+            input.id = id;
+            input.value = valueText;
+
+            const label = document.createElement('label');
+            label.htmlFor = id;
+            label.textContent = valueText;
+
+            wrapper.appendChild(input);
+            wrapper.appendChild(label);
+            form.appendChild(wrapper);
+        }
+
+        createCheckbox('vehicle1', 'I have a bike');
+        createCheckbox('vehicle2', 'I have a car');
+        createCheckbox('vehicle3', 'I have a boat');
+
+        const submitButton = document.createElement('button');
+        submitButton.type = 'submit';
+        submitButton.textContent = 'Send';
+        form.appendChild(submitButton);
+
+        document.body.appendChild(form);
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let errors = [];
+
+            if (!/^[A-Za-zÆØÅæøå ]+$/.test(fnameInput.value.trim())) {
+                errors.push('Fornavn kan kun inneholde bokstaver');
+            }
+            if (!/^[A-Za-zÆØÅæøå ]+$/.test(lnameInput.value.trim())) {
+                errors.push('Etternavn kan kun inneholde bokstaver');
+            }
+
+            const numVal = parseInt(numberInput.value); 
+
+            if (isNaN(numVal) || numVal <= 0 || numVal > 100) {
+                errors.push('Skriv inn tall mellom 1 - 100');            
+            }
+
+            const favLang = form.querySelector('input[name="fav_language"]:checked');
+            if (!favLang) errors.push('Velg et favorittspråk');
+
+            const checkedVehicles = Array.from(form.querySelectorAll('input[type="checkbox"]:checked'));
+            if (checkedVehicles.length === 0) errors.push('Velg minst ett kjøretøy');
+
+            if (errors.length > 0) {
+                errorDiv.innerHTML = errors.map(err => `<p style="color:red;">${err}</p>`).join('');
+                return;
+            }
+
+            const data = {
+                fname: fnameInput.value,
+                lname: lnameInput.value,
+                range: rangeInput.value,
+                number: numberInput.value,
+                fav_language: form.querySelector('input[name="fav_language"]:checked')?.value || null,
+                vehicles: Array.from(form.querySelectorAll('input[type="checkbox"]:checked'))
+                    .map(cb => cb.value)
+            };
+
+            console.log(data);
+
+        });
+    </script>
+
+</body>
+
+</html>
