@@ -9,7 +9,11 @@
 </head>
 
 <body>
-    <div class="game">
+    <div class="game" id="houseBox">
+
+    </div>
+
+    <!--     <div class="game">
         <div class="house green">
             <div class="box">
                 <div class="square square-one green"></div>
@@ -132,7 +136,150 @@
         <div class="cells" style="top: 46.66%;left:0;"></div>
 
 
-    </div>
+    </div> -->
+
+    <script>
+        createHouses();
+        createCelles();
+
+        function createHouses() {
+            createHouse("house green", "box", "greenBox");
+            createSquare("greenBox", "square square-one green");
+            createSquare("greenBox", "square square-two green");
+            createSquare("greenBox", "square square-three green");
+            createSquare("greenBox", "square square-four green");
+
+            createHouse("house yellow", "box", "yellowBox", "right:0");
+            createSquare("yellowBox", "square square-one yellow");
+            createSquare("yellowBox", "square square-two yellow");
+            createSquare("yellowBox", "square square-three yellow");
+            createSquare("yellowBox", "square square-four yellow");
+
+            createHouse("house red", "box", "redBox", "bottom:0");
+            createSquare("redBox", "square square-one red");
+            createSquare("redBox", "square square-two red");
+            createSquare("redBox", "square square-three red");
+            createSquare("redBox", "square square-four red");
+
+            createHouse("house blue", "box", "blueBox", "bottom:0; right:0");
+            createSquare("blueBox", "square square-one blue");
+            createSquare("blueBox", "square square-two blue");
+            createSquare("blueBox", "square square-three blue");
+            createSquare("blueBox", "square square-four blue");
+        }
+
+        
+        function createCelles() {
+            createCell("home", "top:40%");
+            createCell("g-start", "top:40%; left:6.66%");
+            createCell("", "top:40%; left:13.32%");
+            createCell("", "top:40%; left:19.98%");
+            createCell("", "top:40%; left:26.64%");
+            createCell("", "top:40%; left:33.3%");
+
+            createCell("", "top: 0; left:40%;");
+            createCell("", "top: 6.66%; left:40%;");
+            createCell("safe", "top: 13.32%; left:40%;");
+            createCell("", "top: 19.98%; left:40%;");
+            createCell("", "top: 26.64%; left:40%;");
+            createCell("", "top: 33.3%; left:40%;");
+
+            createCell("", "top: 0; left:46.66%;");
+            createCell("yellow", "top: 6.66%; left:46.66%;");
+            createCell("yellow", "top: 13.32%; left:46.66%;");
+            createCell("yellow", "top: 19.98%; left:46.66%;");
+            createCell("yellow", "top: 26.64%; left:46.66%;");
+            createCell("yellow", "top: 33.3%; left:46.66%;");
+
+            createCell("", "top: 0;left:53.32%;");
+            createCell("y-start", "top: 6.66%;left:53.32%;");
+            createCell("", "top: 13.32%;left:53.32%;");
+            createCell("", "top: 19.98%;left:53.32%;");
+            createCell("", "top: 26.64%;left:53.32%;");
+            createCell("", "top: 33.3%;left:53.32%;");
+
+            createCell("", "top: 40%;left:33.3%;"); // lager celler som vises
+            createCell("", "top: 40%;left:26.64%;"); // lager celler som vises
+            createCell("", "top: 40%;left:19.98%;"); // lager celler som vises
+            createCell("safe", "top: 40%;left:13.32%;");
+            createCell("", "top: 40%;left:6.66%;");
+            createCell("", "top: 40%;left:0%;");
+
+            createCell("blue", "top: 46.66%; right: 33.3%;");
+            createCell("blue", "top: 46.66%; right: 26.64%;");
+            createCell("blue", "top: 46.66%; right: 19.98%;");
+            createCell("blue", "top: 46.66%; right: 13.32%;");
+            createCell("blue", "top: 46.66%; right: 6.66%;");
+            createCell("", "top: 46.66%; right: 0%;");
+
+            createCell("", "top: 53.32%; right: 33.3%;");
+            createCell("", "top: 53.32%; right: 26.64%;");
+            createCell("", "top: 53.32%; right: 19.98%;");
+            createCell("", "top: 53.32%; right: 13.32%;");
+            createCell("b-start", "top: 53.32%; right: 6.66%;");
+            createCell("", "top: 53.32%; right: 0;");
+
+            createCell("", "bottom: 0%; left:53.32%;");
+            createCell("", "bottom: 6.66%; left:53.32%;");
+            createCell("safe", "bottom: 13.32%; left:53.32%;");
+            createCell("", "bottom: 19.98%; left:53.32%;");
+            createCell("", "bottom: 26.64%; left:53.32%;");
+            createCell("", "bottom: 33.3%; left:53.32%;");
+
+            createCell("", "bottom: 0%; left:46.66%;");
+            createCell("red", "bottom: 6.66%; left:46.66%;");
+            createCell("red", "bottom: 13.32%; left:46.66%;");
+            createCell("red", "bottom: 19.98%; left:46.66%;");
+            createCell("red", "bottom: 26.64%; left:46.66%;");
+            createCell("red", "bottom: 33.3%; left:46.66%;");
+
+            createCell("", "bottom: 0%; left:40%;");
+            createCell("r-start", "bottom: 6.66%; left:40%;");
+            createCell("", "bottom: 13.32%; left:40%;");
+            createCell("", "bottom: 19.98%; left:40%;");
+            createCell("", "bottom: 26.64%; left:40%;");
+            createCell("", "bottom: 33.3%; left:40%;");
+
+            createCell("", "top: 53.32%; left:33.3%;");
+            createCell("", "top: 53.32%; left:26.64%;");
+            createCell("", "top: 53.32%; left:19.98%;");
+            createCell("safe", "top: 53.32%; left:13.32%;");
+            createCell("", "top: 53.32%; left:6.66%;");
+            createCell("", "top: 53.32%; left:0%;");
+
+            createCell("green", "top: 46.66%; left:33.3%;");
+            createCell("green", "top: 46.66%; left:26.64%;");
+            createCell("green", "top: 46.66%; left:19.98%;");
+            createCell("green", "top: 46.66%; left:13.32%;");
+            createCell("green", "top: 46.66%; left:6.66%;");
+            createCell("", "top: 46.66%; left:0%;");
+        }
+
+
+
+
+        function createHouse(houseClass, boxClass, boxId, style = "") {
+            document.getElementById('houseBox').innerHTML += /*HTML*/ `
+            <div class="${houseClass}" style="${style}">
+                <div class="${boxClass}" id="${boxId}"></div> 
+            </div> `;
+
+        }
+
+        function createSquare(boxId, classNames) {
+            document.getElementById(boxId).innerHTML += /*HTML*/ `
+            <div class="${classNames}"></div> `;
+
+        }
+
+        function createCell(classNames, style) {
+            document.getElementById("houseBox").innerHTML += `
+            <div class="cells ${classNames}" style="${style}"></div>  `;
+
+        }
+
+    </script>
+
 </body>
 
 </html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #board {
+            display: grid;
+            grid-template-columns: repeat(8, 100px);
+            grid-template-rows: repeat(8, 100px);
+        }
+
+        #board>div {
+            border: 1px solid lightblue;
+        }
+
+        .selected {
+            background-color: yellow;
+        }
+
+        .buttons {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="board"></div>
+
+    <div class="buttons">
+        <button onclick="goRight()">Høyre</button>
+        <button onclick="goLeft()">Venstre</button>
+        <button onclick="goUp()">Opp</button>
+        <button onclick="goDown()">Ned</button>
+    </div>
+
+    <script>
+
+        let selectedSquareIndex = 7;
+        const size = 64;
+
+        function showBoard2() {
+            const board = document.getElementById('board');
+            board.innerHTML = "";
+            createDiv(selectedSquareIndex);
+            createDiv(1, 'selected');
+            createDiv(size - selectedSquareIndex - 1);
+        }
+
+        function createDiv(countDiv, classId = "square") {
+            document.getElementById('board').innerHTML += `<div class="${classId}"></div>`.repeat(countDiv);
+        }
+
+        function clampSelection() {
+             selectedSquareIndex = Math.max(0, Math.min(63, selectedSquareIndex));       
+        }
+
+        function goUp() {
+            selectedSquareIndex -= 8;
+            clampSelection();
+            showBoard2();
+        }
+
+        function goDown() {
+            selectedSquareIndex += 8;
+            clampSelection();
+            showBoard2();
+        }
+
+        function goRight() {           
+            selectedSquareIndex++; 
+            clampSelection();           
+            showBoard2();
+        }
+
+        function goLeft() {            
+            selectedSquareIndex--;  
+            clampSelection();        
+            showBoard2();
+        }
+
+        showBoard2();
+
+    </script>
+</body>
+
+</html>
