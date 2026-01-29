@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="my-id">Dette er en tekst</div>
+
+    <button onclick="changeFontSize(1)">Opp</button>
+    <button onclick="changeFontSize(-1)">Ned</button>
+    <button onclick="changeColor('green', 5)">GreenOpp</button>
+    <button onclick="changeColor('green', - 5)">GreenNed</button>
+    <button onclick="changeColor('red', 5)">RedOpp</button>
+    <button onclick="changeColor('red', - 5)">RedDown</button>
+    <button onclick="changeColor('blue', 5)">BlueUp</button>
+    <button onclick="changeColor('blue', - 5)">BlueDown</button>
+
+
+
+    <select id="select-id" onchange="changefontFamily()">
+        <option value="">Velg font</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Ariel">Ariel</option>
+        <option value="Garamond">Garamond</option>
+    </select>
+
+    <script>
+        let colors = {
+            red: 125,
+            green: 125,
+            blue: 125
+        };
+
+        let currentFontSize = 24;
+        let currentFontFamily = "Arial";
+        const text = document.getElementById('my-id');
+        const select = document.getElementById('select-id');
+
+        function changeFontSize(step) {
+            currentFontSize += step;
+            text.style.fontSize = `${currentFontSize}px`;
+        }
+
+        function changefontFamily() {
+            currentFontFamily = select.value;
+            text.style.fontFamily = currentFontFamily;
+        }
+
+        function changeBackgroundcolor() {
+            text.style.backgroundColor = `rgb(${colors.red},${colors.green},${colors.blue})`;
+        }
+
+        function changeColor(color, step) {
+            colors[color] += step;
+            changeBackgroundcolor();
+        }
+
+
+
+    </script>
+</body>
+
+</html>

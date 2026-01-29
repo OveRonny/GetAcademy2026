@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="my-id">Dette er en tekst</div>
+
+    <button onclick="changeFontSize(1)">Opp</button>
+    <button onclick="changeFontSize(-1)">Ned</button>
+
+
+    <select id="select-id" onchange="changefontFamily()">
+        <option value="">Velg font</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Ariel">Ariel</option>
+        <option value="Garamond">Garamond</option>
+    </select>
+
+    <script>
+        let currentFontSize = 24;
+        let currentFontFamily = "Arial";
+        const text = document.getElementById('my-id');
+        const select = document.getElementById('select-id');
+
+        function changeFontSize(step) {
+            currentFontSize += step;
+            text.style.fontSize = `${currentFontSize}px`;
+        }
+
+        function changefontFamily() {
+            currentFontFamily = select.value;
+            text.style.fontFamily = currentFontFamily;
+        }
+
+    </script>
+</body>
+
+</html>
