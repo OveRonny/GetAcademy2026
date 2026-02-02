@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dato velger</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        function createNumberSelector(number, minNumber, maxNumber, name) {
+            return `
+           
+                <div id="${name}Main" style="display: flex; align-items: center;">
+                    <div id="${name}" style="font-size: 300%;">${number}</div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                        <button onclick="select${name}(${number + 1})" ${number >= maxNumber ? 'disabled' : ''}>▲</button>
+                        <button onclick="select${name}(${number - 1})" ${number <= minNumber ? 'disabled' : ''}>▼</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML = createNumberSelector(31, 1, 31, 'Day');
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

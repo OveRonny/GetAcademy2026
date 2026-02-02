@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        function tempInCelciusOrFahrenheit(temp, type) {
+            if(type === 'Fahrenheit') return  `<p>Celsius er: ${((temp -32) * 5/9).toFixed(1)}</p>`;
+            if(type === 'Celsius') return `<p>Fahrenheit er: ${temp * 9/5 + 32}</p>`;
+        }
+
+
+        function updateView() {
+            document.getElementById('app').innerHTML = tempInCelciusOrFahrenheit(80, 'Fahrenheit');
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.trafficLight {
+            width: 3rem;
+            height: 10rem;
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        div.light {
+            background-color: gray;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <script>
+
+        let phase = 0;
+
+        function createLightDiv(color) {
+            return /*HTML*/`<div class="light" style="background-color: ${color};"></div>
+            `;
+        }
+
+        function createTrafficLight(redOn, yellowOn, greenOn) {
+
+            let color1 = redOn ? 'red' : 'gray';
+            let color2 = yellowOn ? 'yellow' : 'gray';
+            let color3 = greenOn ? 'green' : 'gray';
+
+            return `
+                <div class="trafficLight">
+                    ${createLightDiv(color1)}
+                    ${createLightDiv(color2)}
+                    ${createLightDiv(color3)}
+                </div>
+            `;
+        }
+
+        function drawTrafficLight() {
+
+            let html;
+            if (phase === 0) html = createTrafficLight(true, false, false);
+            if (phase === 1) html = createTrafficLight(true, true, false);
+            if (phase === 2) html = createTrafficLight(false, false, true);
+            if (phase === 3) html = createTrafficLight(false, true, false);
+
+
+            document.getElementById('app').innerHTML = `
+                ${html}
+                <button onclick="goToNextPhase()">Neste</button>
+            `;
+        }
+
+        function goToNextPhase() {
+            phase++;
+            if (phase > 3) phase = 0; 
+            drawTrafficLight();
+        }
+
+       
+        drawTrafficLight();
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>

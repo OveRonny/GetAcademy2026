@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <script>
+
+
+   /*      function drawField(id, label, type, groupName, value) {
+            let minMaxStep = '';
+            if (type == 'range') {
+                minMaxStep = 'min="1" max="100" step="1"';
+            }
+            let breakTag = '<br/>';
+            let labelTag = `<label for="${id}">${label}</label> `;
+            let fieldTag = `<input type="${type}" ${minMaxStep} id="${id}">`;
+
+            let html = labelTag + breakTag + fieldTag + breakTag;
+            if (type == 'radio') {
+                html = ` <input type="${type}" name="${groupName}" id="${id}"> ` + labelTag + breakTag;
+            }
+
+            if (type == 'checkbox') {
+                html = ` <input type="${type}" name="${groupName}" id="${id}" value="${value}"> ` + labelTag + breakTag;
+            }
+
+            return html;
+        } */
+
+        function drawField(id, label, type, groupName = '', value = '') {
+            const breakTag = '<br/>';
+            const labelTag = `<label for="${id}">${label}</label>`;
+
+            let attrs = `type="${type}" id="${id}"`;
+
+            if (type === 'range') {
+                attrs += ' min="1" max="100" step="1"';
+            }
+
+            if (type === 'radio' || type === 'checkbox') {
+                attrs += ` name="${groupName}"`;
+            }
+
+            if (type === 'checkbox') {
+                attrs += ` value="${value}"`;
+            }
+
+            const inputTag = `<input ${attrs}>`;
+            
+            if (type === 'radio' || type === 'checkbox') {
+                return `${inputTag} ${labelTag}${breakTag}`;
+            }
+
+            return `${labelTag}${breakTag}${inputTag}${breakTag}`;
+        }
+
+        function drawForm() {
+            let html = '';
+
+            html += drawField('fname', 'First Name', 'text');
+            html += drawField('lname', 'Last Name', 'text');
+            html += drawField('zeroToHundred', 'En til hundre', 'range');
+            html += drawField('html', 'HTML', 'radio', 'fav_language');
+            html += drawField('css', 'CSS', 'radio', 'fav_language');
+            html += drawField('c#', 'C#', 'radio', 'fav_language');
+            html += drawField('js', 'Javascript', 'radio', 'fav_language');
+            html += drawField('vehicle1', 'I have a bike', 'checkbox', 'vehicles', 'Bike');
+            html += drawField('vehicle2', 'I have a car', 'checkbox', 'vehicles', 'Car');
+            html += drawField('vehicle3', 'I have a boat', 'checkbox', 'vehicles', 'Boat');
+
+            return `<form  onsubmit="saveForm(event)">
+                        ${html}
+                        <button type="submit">Lagre</button>                         
+                    </form>`;
+
+        }
+
+        function saveForm(event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById('fname').value;
+            const lastName = document.getElementById('lname').value;
+            const rangeValue = document.getElementById('zeroToHundred').value;
+
+            const favoriteLanguage =
+                document.querySelector('input[name="fav_language"]:checked')?.id;
+
+            const vehicles = [...document.querySelectorAll(
+                'input[name="vehicles"]:checked'
+            )].map(cb => cb.value);
+
+            console.log({
+                firstName,
+                lastName,
+                rangeValue,
+                favoriteLanguage,
+                vehicles
+            });
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML = drawForm();
+        }
+
+        updateView();
+
+
+    </script>
+</body>
+
+</html>

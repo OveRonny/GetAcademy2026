@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            border: 1px solid black;
+            height: 200px;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input id="range" type="range" min="0" max="100" value="50" oninput="onRangeChange(this.value)" />
+        <p id="value"></p>
+
+    </div>
+
+
+
+    <script>
+        let rangeColor = 50;
+
+        function onRangeChange(value) {
+            rangeColor = Number(value);
+            updateView();
+        }
+
+        function getBackgroundColor(value) {
+            if (value > 70) return 'green';
+            if (value < 30) return 'red';
+            return 'yellow';
+        }
+
+        function updateView() {
+            const app = document.getElementById('app');
+            const valueText = document.getElementById('value');
+
+            app.style.backgroundColor = getBackgroundColor(rangeColor);
+            valueText.innerHTML = `Verdi: ${rangeColor}`;
+        }
+
+        updateView();
+
+    </script>
+</body>
+
+</html>

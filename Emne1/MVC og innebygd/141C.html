@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <script>
+        let colorBackGround = "";
+        let colorForGround = "";
+
+        function renderSelects() {
+            return `
+                <select id="bgSelect" onchange="colorBackGround = this.value">
+                    <option value="">Velg bakgrunn</option>
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="yellow">Yellow</option>
+                </select>
+
+                <select id="fgSelect" onchange="colorForGround = this.value">
+                    <option value="">Velg tekstfarge</option>
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="yellow">Yellow</option>
+                </select>
+            `;
+
+        }
+
+        function addDiv() {          
+
+            document.body.innerHTML += `
+                <div style="
+                    background-color: ${colorBackGround};
+                    color: ${colorForGround};
+                    padding: 10px;
+                    margin: 5px 0;
+                    border: 1px solid black;">
+                
+                    Bakgrunn: ${colorBackGround}, Tekst: ${colorForGround}
+                </div>
+            `;
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML = `
+                ${renderSelects()}
+               <button onclick="addDiv()">Lag div</button>
+            `;           
+        }
+        updateView();
+    </script>
+</body>
+
+</html>

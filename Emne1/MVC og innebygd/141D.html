@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        let forNavn = "";
+        let epost = "";
+        let isEditing = true;       
+
+        function renderForm() {
+            return `
+                <div>
+                    <label>Fornavn</label>
+                    <input 
+                        type="text"
+                        value="${forNavn}"
+                        oninput="forNavn = this.value">
+                </div>
+                <div>
+                    <label>Epost</label>
+                    <input 
+                        type="email"
+                        value="${epost}"
+                        oninput="epost = this.value">
+                </div>
+                <button onclick="save()">Lagre</button>
+            `;
+        }
+
+        function renderResult() {
+            return `
+                <p>Fornavn: ${forNavn}</p>
+                <p>Epost: ${epost}</p>
+                <button onclick="edit()">Rediger</button>
+            `;
+        }
+
+        function save() {
+            isEditing = false;
+            updateView();
+        }
+
+        function edit() {
+            isEditing = true;
+            updateView();
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML = `
+            ${isEditing ? renderForm() : renderResult()}
+            `;
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

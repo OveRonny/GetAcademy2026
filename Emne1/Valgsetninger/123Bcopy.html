@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            border: 1px solid black;
+            height: 200px;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        let rangeColor = 50;
+
+        const app = document.getElementById('app');
+
+        const range = document.createElement('input');
+        range.type = 'range';
+        range.min = 0;
+        range.max = 100;
+        range.value = rangeColor;
+        range.addEventListener('input', (e) => {
+            rangeColor = Number(e.target.value);
+            updateView();
+        });
+
+        const valueText = document.createElement('p');
+
+        app.appendChild(range);
+        app.appendChild(valueText);
+
+        function getBacgroundColor(value) {
+            if (value > 70) return 'green';
+            if (value < 30) return 'red';
+            return 'yellow';
+        }
+
+        function updateView() {
+            app.style.backgroundColor = getBacgroundColor(rangeColor);
+            valueText.textContent = `Verdi: ${rangeColor}`;
+        }
+
+        updateView();
+
+    </script>
+</body>
+
+</html>

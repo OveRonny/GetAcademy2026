@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+    <style>
+        div.square {
+            border: 1px solid black;
+        }
+
+        div.board {
+            display: grid;
+            grid-template-columns: repeat(2, 10rem);
+            grid-template-rows: repeat(2, 10rem);
+        }
+
+        img {
+            width: 90%;
+        }
+
+        div.square{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+<body>
+
+    <div id="app"></div>
+
+
+        
+
+
+    <script>
+
+        let logo = "https://getacademy.no/hubfs/GET_RGB_logo-01-2.png"
+        let logoIndex = 1;
+        let direction = "";
+        
+
+        function createSquare() {
+        return `
+                <div class="board">                       
+                        ${createSquareWithLogo()}                 
+                        ${createOneSquare()}
+                        ${createOneSquare()}
+                        ${createOneSquare()}   
+                        ${createButtons('Right')}              
+                </div>               
+
+            `;
+        }
+
+        function createOneSquare() {
+            return ` 
+                    <div class="square">                
+                    </div>`;
+        }
+
+        function createSquareWithLogo() {
+        return `
+               <div class="square">  
+                        <img src="${logo}" />              
+                    </div>     
+                     
+            `;
+        }
+
+        function createButtons(direction) {
+            return `
+                    <button onclick="go${direction}">Go ${direction}</button>
+                `;
+        }
+
+        function goRight() {
+            
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML = `
+                ${createSquare()}                
+            `;
+           
+        }
+
+        updateView();
+    </script>
+</body>
+</html>

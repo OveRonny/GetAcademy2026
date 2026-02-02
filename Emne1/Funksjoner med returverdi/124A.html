@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        function createOrderLine(Item, price, count) {
+            return `
+                <p>${count} stk. ${Item} a ${price}kr = ${price * count}kr</p>
+            `;
+        }
+
+        function orderLines() {
+            return createOrderLine('Tastatur', '129', 3);
+
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML = orderLines();
+        }
+
+        updateView();
+
+    </script>
+</body>
+
+</html>

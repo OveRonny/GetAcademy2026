@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        function createNumberSelector(number, minNumber, maxNumber, name) {
+            return `
+           
+                <div id="${name}Main" style="display: flex; align-items: center;">
+                    <div id="${name}" style="font-size: 300%;">${number}</div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                        <button onclick="select${name}(${number + 1})" ${number >= maxNumber ? 'disabled' : ''}>▲</button>
+                        <button onclick="select${name}(${number - 1})" ${number <= minNumber ? 'disabled' : ''}>▼</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectedDate(day, month, year) {
+            return `<p>Valgt dato er: ${day}. ${month}. ${year}</p>`;
+        }
+
+        function selectDay(day) {
+            document.getElementById('DayMain').outerHTML =
+                createNumberSelector(day, 1, 31, 'Day');
+                updateSelectedDate()
+        }
+
+        function selectMonth(month) {
+            document.getElementById('MonthMain').outerHTML =
+                createNumberSelector(month, 1, 12, 'Month');
+                updateSelectedDate()
+        }
+
+        function selectYear(year) {
+            document.getElementById('YearMain').outerHTML =
+                createNumberSelector(year, 2000, 2026, 'Year');
+                updateSelectedDate()
+        }
+        
+        function updateSelectedDate() {
+            const d = document.getElementById('Day').textContent;
+            const m = document.getElementById('Month').textContent;
+            const y = document.getElementById('Year').textContent;
+
+            document.getElementById('dateOutput').innerHTML =
+                selectedDate(d, m, y);
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML =
+                createNumberSelector(13, 1, 31, 'Day')
+                + createNumberSelector(8, 1, 12, 'Month')
+                + createNumberSelector(2023, 2020, 2026, 'Year')
+                + `<div id="dateOutput"></div>`;
+            updateSelectedDate();
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

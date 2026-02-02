@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        div {
+            font-size: 300%;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // model
+        let points = 0;
+        let pointsPerClick = 1;
+        let smileyIndex = 0;
+        let cheated  = false;
+
+        // controller
+        function doClick() {
+            points += pointsPerClick;
+            smileyIndex = 1 - smileyIndex;
+            updateView();
+        }
+
+        function buyUpgrade() {
+            if (points < 10) return;
+            points -= 10;
+            pointsPerClick++;
+            updateView();
+        }
+
+        function doublePoints() {
+            points *= 10;
+            pointsPerClick *= 10;
+            cheated = true;
+            updateView();
+        }
+
+        // view
+        updateView();
+        function updateView() {
+            var smiley = smileyIndex == 0 ? '😀' : '😁';
+            let cheatMessage = cheated ? "Du har jukset!" : "";           
+            document.getElementById('app').innerHTML = `
+                <div id="image" onclick="doClick()">${smiley}</div>
+                <div id="pointsInfo">${points}</div>
+                <button onclick="buyUpgrade()">Kjøp oppgradering (10 poeng)</button>
+                <button onclick="doublePoints()">Jukseknapp</button>
+                <p>${cheatMessage}</p>
+            `;
+        }
+    </script>
+</body>
+
+</html>
