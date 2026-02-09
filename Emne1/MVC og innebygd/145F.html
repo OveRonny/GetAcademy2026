@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        const words = ['javascript', 'csharp', 'bamse', 'bil'];
+        const word = words[Math.floor(Math.random() * words.length)];
+
+        let guessedWord = Array(word.length).fill('_');
+        let guessedLetters = [];
+        let lives = 6;
+        const game = document.getElementById('app');
+
+
+        function updateView() {
+            game.innerHTML = `
+                <p><strong>Ordet:</strong> ${guessedWord.join(' ')}</p>
+                <p><strong>Gjettede bokstaver:</strong> ${guessedLetters.join(', ')}</p>
+                <p><strong>Liv igjen:</strong> ${lives}</p>
+
+                <input id="letter" maxlength="1">
+                <button onclick="guessLetter()">Gjett</button>
+            `;
+        }
+
+        function guessLetter() {
+            const input = document.getElementById('letter');
+            const letter = input.value.toLowerCase();
+            input.value = '';
+
+            if (!letter || guessedLetters.includes(letter)) return;
+
+            guessedLetters.push(letter);
+
+            if (word.includes(letter)) {
+                for (let i = 0; i < word.length; i++) {
+                    if (word[i] === letter) {
+                        guessedWord[i] = letter;
+                    }
+                }
+            } else {
+                lives--;
+            }
+
+            if (!guessedWord.includes('_')) {
+                game.innerHTML = `<h2>🎉 Du vant! Ordet var: ${word}</h2>`;
+                return;
+            }
+
+            if (lives === 0) {
+                game.innerHTML = `<h2>💀 Du tapte! Ordet var: ${word}</h2>`;
+                return;
+            }
+
+            updateView();
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>
