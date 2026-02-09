@@ -1,94 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 
-    <style>
-        div.square {
-            border: 1px solid black;
-        }
+<style>
+    div.square {
+        border: 1px solid black;
+    }
 
-        div.board {
-            display: grid;
-            grid-template-columns: repeat(2, 10rem);
-            grid-template-rows: repeat(2, 10rem);
-        }
+    div.board {
+        display: grid;
+        grid-template-columns: repeat(2, 10rem);
+        grid-template-rows: repeat(2, 10rem);
+    }
 
-        img {
-            width: 90%;
-        }
+    div.buttons {
+        width: 20rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-        div.square{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+    img {
+        width: 90%;
+    }
+
+    div.square {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
 
 <body>
 
     <div id="app"></div>
 
-
-        
-
-
     <script>
+        // "https://getacademy.no/hubfs/GET_RGB_logo-01-2.png"
+        // <img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png" />
+        let logoPosisjon = 0;
 
-        let logo = "https://getacademy.no/hubfs/GET_RGB_logo-01-2.png"
-        let logoIndex = 1;
-        let direction = "";
-        
 
-        function createSquare() {
-        return `
-                <div class="board">                       
-                        ${createSquareWithLogo()}                 
-                        ${createOneSquare()}
-                        ${createOneSquare()}
-                        ${createOneSquare()}   
-                        ${createButtons('Right')}              
-                </div>               
-
-            `;
-        }
-
-        function createOneSquare() {
-            return ` 
-                    <div class="square">                
-                    </div>`;
-        }
-
-        function createSquareWithLogo() {
-        return `
-               <div class="square">  
-                        <img src="${logo}" />              
-                    </div>     
-                     
-            `;
-        }
-
-        function createButtons(direction) {
+        function createDiv() {
             return `
-                    <button onclick="go${direction}">Go ${direction}</button>
-                `;
+                <div class="board">
+                    <div class="square">
+                        ${logoPosisjon === 0 ? `<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">` : ""}
+                    </div>
+                    <div class="square">
+                        ${logoPosisjon === 1 ? `<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">` : ""}
+                    </div>
+                    <div class="square">
+                        ${logoPosisjon === 2 ? `<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">` : ""}
+                    </div>
+                    <div class="square">
+                        ${logoPosisjon === 3 ? `<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">` : ""}
+                    </div>
+                </div>
+            `;
         }
 
-        function goRight() {
-            
+        function createButtons() {
+            return `
+                <div class="buttons">
+                    <button 
+                        ${logoPosisjon === 0 || logoPosisjon === 1 ? "disabled" : ""}
+                        onclick="moveLogo(logoPosisjon - 2)">
+                        ▲
+                    </button>
+
+                    <div>
+                        <button 
+                            ${logoPosisjon === 0 || logoPosisjon === 2 ? "disabled" : ""}
+                            onclick="moveLogo(logoPosisjon - 1)">
+                            ◀
+                        </button>
+
+                        <button 
+                            ${logoPosisjon === 1 || logoPosisjon === 3 ? "disabled" : ""}
+                            onclick="moveLogo(logoPosisjon + 1)">
+                             ▶
+                        </button>
+                        
+                    </div>
+
+                    <button 
+                            ${logoPosisjon === 2 || logoPosisjon === 3 ? "disabled" : ""}
+                            onclick="moveLogo(logoPosisjon + 2)">
+                            ▼
+                    </button>
+                </div>
+            `;
+        }
+
+        function moveLogo(nyPosisjon) {
+            logoPosisjon = nyPosisjon;
+            updateView();
         }
 
         function updateView() {
-            document.getElementById('app').innerHTML = `
-                ${createSquare()}                
-            `;
-           
+            document.getElementById('app').innerHTML = createDiv() + createButtons();
         }
 
         updateView();
     </script>
 </body>
+
 </html>

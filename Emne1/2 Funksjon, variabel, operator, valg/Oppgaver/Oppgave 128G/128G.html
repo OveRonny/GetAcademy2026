@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/Emne1/2 Funksjon, variabel, operator, valg/Oppgaver/Oppgave 128G/styles.css">
+</head>
+
+<body>
+    <div id="board">
+    </div>
+    <script>
+
+        function createDiv(classId, symbol = '') {
+            return `<div class="${classId}">${symbol}</div>`;
+        }
+
+        function createBlackBackRow() {
+            return createDiv('lightSquare blackPiece', '♜') +
+                createDiv('darkSquare blackPiece', '♞') +
+                createDiv('lightSquare blackPiece', '♝') +
+                createDiv('darkSquare blackPiece', '♛') +
+                createDiv('lightSquare blackPiece', '♚') +
+                createDiv('darkSquare blackPiece', '♝') +
+                createDiv('lightSquare blackPiece', '♞') +
+                createDiv('darkSquare blackPiece', '♜');
+        }
+
+        function createBlackPawn(squareClass) {
+            return createDiv(squareClass + ' blackPiece', '♟');
+        }
+
+        function createBlackPawnRow() {
+            return createBlackPawn('darkSquare') +
+                createBlackPawn('lightSquare') +
+                createBlackPawn('darkSquare') +
+                createBlackPawn('lightSquare') +
+                createBlackPawn('darkSquare') +
+                createBlackPawn('lightSquare') +
+                createBlackPawn('darkSquare') +
+                createBlackPawn('lightSquare');
+        }
+
+        function createEmptyRowLightStart() {
+            return createDiv('lightSquare') +
+                createDiv('darkSquare') +
+                createDiv('lightSquare') +
+                createDiv('darkSquare') +
+                createDiv('lightSquare') +
+                createDiv('darkSquare') +
+                createDiv('lightSquare') +
+                createDiv('darkSquare');
+        }
+
+        function createEmptyRowDarkStart() {
+            return createDiv('darkSquare') +
+                createDiv('lightSquare') +
+                createDiv('darkSquare') +
+                createDiv('lightSquare') +
+                createDiv('darkSquare') +
+                createDiv('lightSquare') +
+                createDiv('darkSquare') +
+                createDiv('lightSquare');
+        }
+
+        function createWhitePawn(squareClass) {
+            return createDiv(squareClass + ' whitePiece', '♙');
+        }
+
+        function createWhitePawnRow() {
+            return createWhitePawn('lightSquare') +
+                createWhitePawn('darkSquare') +
+                createWhitePawn('lightSquare') +
+                createWhitePawn('darkSquare') +
+                createWhitePawn('lightSquare') +
+                createWhitePawn('darkSquare') +
+                createWhitePawn('lightSquare') +
+                createWhitePawn('darkSquare');
+        }
+
+        function createWhiteBackRow() {
+            return createDiv('darkSquare whitePiece', '♖') +
+                createDiv('lightSquare whitePiece', '♘') +
+                createDiv('darkSquare whitePiece', '♗') +
+                createDiv('lightSquare whitePiece', '♕') +
+                createDiv('darkSquare whitePiece', '♔') +
+                createDiv('lightSquare whitePiece', '♗') +
+                createDiv('darkSquare whitePiece', '♘') +
+                createDiv('lightSquare whitePiece', '♖');
+        }
+
+        function createBoard() {
+            document.getElementById('board').innerHTML =
+                createBlackBackRow() +
+                createBlackPawnRow() +
+                createEmptyRowLightStart() +
+                createEmptyRowDarkStart() +
+                createEmptyRowLightStart() +
+                createEmptyRowDarkStart() +
+                createWhitePawnRow() +
+                createWhiteBackRow();
+        }
+
+        createBoard();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+
+    <script>
+
+        let textLinje = 'Dette er en tekstlinje som vanlig rabeldertekstlinje';
+        
+
+        
+        countWords();
+        function countWords() {
+            let ord = textLinje.split(" ");
+            let lengsteOrd = '';
+
+            for (let i = 0; i < ord.length; i++) {
+                if(ord[i].length > lengsteOrd.length) {
+                    lengsteOrd = ord[i];
+                }                
+            }
+
+            console.log(lengsteOrd);
+            console.log(ord);
+
+        }    
+
+        function updateView() {
+            document.getElementById('app').innerHTML = '';
+        }
+
+        updateView();
+    </script>
+</body>
+</html>

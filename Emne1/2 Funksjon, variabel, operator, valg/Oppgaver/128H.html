@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+    <style>
+        button {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            margin: 2px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 190px;
+            height: 55px;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        let displayValue = '';
+        let storedValue = null;
+        let operator = null;
+        let waitingForNewNumber = false;
+
+        function createButton(label) {
+            return `<button onclick="handleClick('${label}')">${label}</button>`;
+        }
+
+        function handleDigit(digit) {
+            if (waitingForNewNumber) {
+                displayValue = digit;
+                waitingForNewNumber = false;
+            } else {
+                displayValue += digit;
+            }
+            updateView();
+        }
+
+        function handleOperator(op) {
+            storedValue = Number(displayValue);
+            operator = op;
+            waitingForNewNumber = true;
+        }
+
+        function calculate() {
+            if (operator === null || storedValue === null) return;
+
+            const currentValue = Number(displayValue);
+            let result;
+
+            if (operator === '+') result = storedValue + currentValue;
+            else if (operator === '-') result = storedValue - currentValue;
+            else if (operator === '*') result = storedValue * currentValue;
+            else if (operator === '/') {
+                result = currentValue === 0 ? 'Error' : storedValue / currentValue;
+            }
+
+            displayValue = result.toString();
+            storedValue = null;
+            operator = null;
+            waitingForNewNumber = true;
+
+            updateView();
+        }
+
+        function clearAll() {
+            displayValue = '';
+            storedValue = null;
+            operator = null;
+            waitingForNewNumber = false;
+            updateView();
+        }
+
+        function handleClick(label) {
+            if (!isNaN(label)) {
+                handleDigit(label);
+            } else if (['+', '-', '*', '/'].includes(label)) {
+                handleOperator(label);
+            } else if (label === '=') {
+                calculate();
+            } else if (label === 'clear') {
+                clearAll();
+            }
+        }
+
+        function display() {
+            return `<input type="text" value="${displayValue || '0'}" readonly />`;
+        }
+
+
+        function drawCalculator() {
+            return `
+                ${createButton('7')}
+                ${createButton('8')}
+                ${createButton('9')}                
+                ${createButton('/')}
+                <br>               
+
+                ${createButton('4')}
+                ${createButton('5')}
+                ${createButton('6')}
+                ${createButton('-')}
+                <br>
+
+                ${createButton('1')}
+                ${createButton('2')}
+                ${createButton('3')}
+                ${createButton('*')}
+                <br>
+
+                ${createButton('0')}
+                ${createButton('.')}                
+                ${createButton('=')}
+                ${createButton('+')}  
+                    <br>
+                ${createButton('clear')} 
+                
+
+            `;
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML = drawCalculator() + display();
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

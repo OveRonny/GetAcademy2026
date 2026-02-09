@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <pre id="output"></pre>
+    <script>
+
+        writeSignes();
+
+        function writeSignes() {
+            for (let index = 0; index < 8; index++) {
+                writeHash();
+            }
+
+            writeLineBreak();
+            writeSpace();
+
+            for (let index = 0; index < 6; index++) {
+                writeHash();
+            }
+
+            writeSpace();
+            writeLineBreak();
+
+            for (let index = 0; index < 2; index++) {
+                writeSpace();
+            }
+
+            for (let index = 0; index < 4; index++) {
+                 writeHash();                
+            }
+            writeLineBreak();
+
+            for (let index = 0; index < 3; index++) {
+                writeSpace();
+            }
+            for (let index = 0; index < 2; index++) {
+                 writeHash();                
+            }
+
+        }
+
+        function writeHash() {
+            document.getElementById('output').innerText += '#';
+        }
+
+        function writeSpace() {
+            document.getElementById('output').innerText += ' ';
+        }
+
+        function writeLineBreak() {
+            document.getElementById('output').innerText += '\n';
+        }
+    </script>
+</body>
+
+</html>

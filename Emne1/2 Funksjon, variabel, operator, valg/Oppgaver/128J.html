@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .my-div {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            width: 150px;
+
+
+        }
+
+        .square {
+            border: 1px solid black;
+            text-align: center;
+            border-radius: 10px;
+            align-content: center;
+            margin: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        
+        let val1 = "1";
+        let val2 = "2";
+        let val3 = "3";
+        let val4 = "4";
+        let val5 = "5";
+        let val6 = "6";
+        let val7 = "7";
+        let val8 = "8";
+        let val9 = ""; // blank
+
+        function createDiv(id, value) {
+            return `<div id="${id}" class="square${value === '' ? ' blank' : ''}" onclick="moveDiv('${id}')">${value}</div>`;
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML = `
+          <div class="my-div">
+              ${createDiv('square1', val1)}
+              ${createDiv('square2', val2)}
+              ${createDiv('square3', val3)}
+              ${createDiv('square4', val4)}
+              ${createDiv('square5', val5)}
+              ${createDiv('square6', val6)}
+              ${createDiv('square7', val7)}
+              ${createDiv('square8', val8)}
+              ${createDiv('square9', val9)}
+          </div>
+      `;
+        }
+
+        function moveDiv(id) {
+            // Bytt med blank hvis mulig
+            if (id === "square1") {
+                if (val2 === "") { val2 = val1; val1 = ""; }
+                else if (val4 === "") { val4 = val1; val1 = ""; }
+            }
+            else if (id === "square2") {
+                if (val1 === "") { val1 = val2; val2 = ""; }
+                else if (val3 === "") { val3 = val2; val2 = ""; }
+                else if (val5 === "") { val5 = val2; val2 = ""; }
+            }
+            else if (id === "square3") {
+                if (val2 === "") { val2 = val3; val3 = ""; }
+                else if (val6 === "") { val6 = val3; val3 = ""; }
+            }
+            else if (id === "square4") {
+                if (val1 === "") { val1 = val4; val4 = ""; }
+                else if (val5 === "") { val5 = val4; val4 = ""; }
+                else if (val7 === "") { val7 = val4; val4 = ""; }
+            }
+            else if (id === "square5") {
+                if (val2 === "") { val2 = val5; val5 = ""; }
+                else if (val4 === "") { val4 = val5; val5 = ""; }
+                else if (val6 === "") { val6 = val5; val5 = ""; }
+                else if (val8 === "") { val8 = val5; val5 = ""; }
+            }
+            else if (id === "square6") {
+                if (val3 === "") { val3 = val6; val6 = ""; }
+                else if (val5 === "") { val5 = val6; val6 = ""; }
+                else if (val9 === "") { val9 = val6; val6 = ""; }
+            }
+            else if (id === "square7") {
+                if (val4 === "") { val4 = val7; val7 = ""; }
+                else if (val8 === "") { val8 = val7; val7 = ""; }
+            }
+            else if (id === "square8") {
+                if (val5 === "") { val5 = val8; val8 = ""; }
+                else if (val7 === "") { val7 = val8; val8 = ""; }
+                else if (val9 === "") { val9 = val8; val8 = ""; }
+            }
+            else if (id === "square9") {
+                if (val6 === "") { val6 = val9; val9 = ""; }
+                else if (val8 === "") { val8 = val9; val9 = ""; }
+            }
+
+            updateView();
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

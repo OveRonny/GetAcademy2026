@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        let secretNumber = getRandomNumber(1, 100);
+        let message = '';
+        let userCount = 0;
+
+        function getRandomNumber(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+        }
+
+        function inputField() {
+            return `
+            <label>Skriv nummer mellom 1-100</label>
+            <input type="number" id="selectedNum" value="${document.getElementById('selectedNum')?.value || ''}">
+            <button onclick="checkNumber()">Klikk</button>
+            <button onclick="reloadPage()">Prøv på nytt</button>`;
+        }
+
+        function showMessage() {
+            return `<p>${message}</p>
+                    <p> Du har prøvd ${userCount} ganger</p>`;
+        }
+
+        function reloadPage() {
+            window.location.reload();
+        }
+
+
+        function checkNumber() {
+            const num = parseInt(document.getElementById('selectedNum').value);
+
+            message = num > secretNumber
+                ? 'Du har for høyt tall'
+                : num < secretNumber
+                    ? 'Du har for lavt tall'
+                    : 'Du har riktig tall!';
+
+            userCount++;
+
+            updateView();
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML =
+                inputField() +
+                showMessage();
+
+        }
+
+        updateView();
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app" />
+
+
+
+    <script>
+
+        let points = 0;
+        let upgrades = 0;
+
+        function createButton(nameId, name) {
+            return `<button onclick="${nameId}()">${name}</button>`;
+        }
+
+        function createPoints() {
+            points += 1 + upgrades;
+            updateView();
+        }
+
+        function createUpgrade() {
+            if (points >= 10) {
+                points -= 10;
+                upgrades += 1; 
+            }
+            updateView();
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML = ` 
+            <p>${points}</p>
+            ${createButton('createPoints', 'Trykk')}
+            ${createButton('createUpgrade', 'Oppgradering')}
+             `;
+        }
+
+        updateView();
+
+    </script>
+</body>
+
+</html>

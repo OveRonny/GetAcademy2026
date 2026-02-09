@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 100px);
+            grid-template-rows: repeat(2, 100px);
+            gap: 10px;
+
+        }
+
+        .cell {
+            height: 80px;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: gray;
+            user-select: none;
+        }
+
+        .active {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        let selectedIndex = -1;      
+        let reactionStart = 0;        
+        let lastReaction = 0;      
+
+        
+        function getRandomNumber(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+        }
+
+        
+        function selectCell(index) {
+            if (index === selectedIndex) {
+                
+                const reactionTimeMs = new Date().getTime() - reactionStart;
+                lastReaction = (reactionTimeMs / 1000).toFixed(2); 
+                updateView();                
+                nextRound();
+            }
+        }
+
+        
+        function createGrid() {
+            return `
+                <div class="grid">
+                    ${createCell(0)}
+                    ${createCell(1)}
+                    ${createCell(2)}
+                    ${createCell(3)}
+                </div>
+                <p>Reaksjonstid: ${lastReaction} sek</p>
+             `;
+        }
+        
+        function createCell(index) {
+            let className = 'cell';
+            if (index === selectedIndex) className += ' active';
+            return `<div class="${className}" onclick="selectCell(${index})"></div>`;
+        }
+
+        
+        function updateView() {
+            document.getElementById('app').innerHTML = createGrid();
+        }
+
+        
+        function nextRound() {
+            selectedIndex = -1; 
+            updateView();
+
+            const delay = getRandomNumber(500, 1500); 
+            setTimeout(() => {
+                selectedIndex = getRandomNumber(0, 3);  
+                reactionStart = new Date().getTime();    
+                updateView();
+            }, delay);
+        }
+
+        
+        nextRound();
+    </script>
+</body>
+
+</html>

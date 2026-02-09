@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        let userScore = 0;
+        let computerScore = 0;
+        let message = '';
+
+        function getRandomNumber(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+        }
+
+        function createButton(name) {
+            return `<button onclick="play('${name}')">${name}</button>`;
+        }
+
+        function showMessage() {
+            `<p>${message}</p>`;
+        }
+
+
+        function play(userChoice) {
+            const randomNumber = getRandomNumber(1, 3);
+            let computerChoice = '';
+
+            if (randomNumber === 1) computerChoice = 'stein';
+            else if (randomNumber === 2) computerChoice = 'saks';
+            else computerChoice = 'papir';
+
+            if (userChoice === computerChoice) {
+                message = 'Uavgjort!';
+            } else if (
+                (userChoice === 'stein' && computerChoice === 'saks') ||
+                (userChoice === 'saks' && computerChoice === 'papir') ||
+                (userChoice === 'papir' && computerChoice === 'stein')
+            ) {
+                userScore++;
+                message = 'Du vant runden!';
+            } else {
+                computerScore++;
+                message = 'Datamaskinen vant runden!';
+            }
+
+            updateView(userChoice, computerChoice);
+        }
+
+
+        function updateView(userChoice = '', computerChoice = '') {
+            document.getElementById('app').innerHTML = `
+                <h2>Stein - Saks - Papir</h2>
+
+                ${createButton('stein')}
+                ${createButton('saks')}
+                ${createButton('papir')}
+
+                <p>
+                    Du valgte: <strong>${userChoice}</strong><br>
+                    Datamaskinen valgte: <strong>${computerChoice}</strong><br>
+                    <strong>${message}</strong>
+                </p>
+
+                <p>
+                    Poeng:<br>
+                    Du: ${userScore}<br>
+                    Datamaskinen: ${computerScore}
+                </p>
+            `;
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

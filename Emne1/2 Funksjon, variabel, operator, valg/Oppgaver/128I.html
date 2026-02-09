@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+
+        let highestNumber = findHighestNumber(150,110,90);
+        console.log(highestNumber);
+
+        function findHighestNumber(num1, num2, num3) {
+            let highest = num1;
+
+            if (num2 > highest) {
+                highest = num2;
+            }
+            if (num3 > highest) {
+                highest = num3;
+            }
+            return highest;
+        }
+
+       
+
+      /*   let numbers = [];
+
+       function getHighestNumber() {
+            return Math.max(...numbers);
+        }
+
+        
+
+        function updateView() {
+            document.getElementById('app').innerHTML = `
+                <label>Legg inn 3 nummer:</label><br><br>
+
+                <input type="number" id="num1"><br>
+                <input type="number" id="num2"><br>
+                <input type="number" id="num3"><br><br>
+
+                <button onclick="handleClick()">Get highest number</button>
+
+                <div id="result"></div>
+            `;
+        }
+
+        function handleClick() {
+            const n1 = Number(document.getElementById('num1').value);
+            const n2 = Number(document.getElementById('num2').value);
+            const n3 = Number(document.getElementById('num3').value);
+
+            if (isNaN(n1) || isNaN(n2) || isNaN(n3)) {
+                document.getElementById('result').innerText =
+                    'Vennligst fyll inn alle tre tallene';
+                return;
+            }
+
+            numbers = [n1, n2, n3];
+            const highest = getHighestNumber();
+
+            document.getElementById('result').innerText =
+                `Det høyeste tallet er: ${highest}`;
+        }   */         
+
+        function updateView() {
+
+        }     
+
+        updateView();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 100px);
+            grid-template-rows: repeat(2, 100px);
+            gap: 10px;
+
+        }
+
+        .cell {
+            height: 80px;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: gray;
+            user-select: none;
+        }
+
+        .active {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        let selectedIndex = getRandomNumber(0, 3);
+
+        function getRandomNumber(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+        }
+
+        function createGrid(selectedIndex) {
+            return `
+                <div class="grid">
+                    ${createCell(0, selectedIndex)}
+                    ${createCell(1, selectedIndex)}
+                    ${createCell(2, selectedIndex)}
+                    ${createCell(3, selectedIndex)}
+                </div>
+            `;
+        }
+
+        function createCell(index, selectedIndex) {
+            let className = 'cell';
+            if (index === selectedIndex) {
+                className += ' active';
+            }
+
+            return `
+                <div 
+                    class="${className}" 
+                    onclick="selectCell(${index})">
+                </div>
+            `;
+        }
+
+        function selectCell(index) {
+            if (index === selectedIndex) {
+                selectedIndex = getRandomNumber(0, 3);
+                updateView();
+            }
+        }
+        function updateView() {
+            document.getElementById('app').innerHTML = createGrid(selectedIndex);
+
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>
