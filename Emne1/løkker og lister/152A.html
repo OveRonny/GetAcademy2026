@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>       
+
+        function makeNumbers() {
+            let result = '';           
+            for (let number = 100; number < 1000; number += 7) {
+                result += number + '<br>';                
+            }
+
+            return result;
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML =  makeNumbers();
+        }   
+
+        updateView();
+    </script>
+</body>
+</html>

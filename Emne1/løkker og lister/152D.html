@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .text {
+            width: 600px;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        function getText() {
+            return `
+                 <textarea id="text-area" class="text"></textarea>     
+            `;
+        }
+
+        function drawButton() {
+            return `<button onclick="countWords()">Tell ord</button>`;
+        }
+
+        function drawResultsContainer() {
+            return `<div id="results" style="margin-top:20px;"></div>`;
+        }
+
+        function countWords() {
+
+            let words = [];
+            let wordsCount = [];
+            let text = document.getElementById('text-area').value;
+
+            text = text.toLowerCase();
+            text = text.replace(/[^a-zæøå\s]/gi, "");
+            let allWords = text.split(/\s+/);
+
+            for (let word of allWords) {
+                if (word === "") continue; 
+                let index = words.indexOf(word);
+                if (index !== -1) {                   
+                    wordsCount[index]++;
+                } else {                   
+                    words.push(word);
+                    wordsCount.push(1);
+                }
+            }
+
+            let resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = "<h3>Resultater:</h3>";
+            for (let i = 0; i < words.length; i++) {
+                resultsDiv.innerHTML += `<div>${words[i]}: ${wordsCount[i]}</div>`;
+            }
+        }
+
+        function updateView() {            
+            document.getElementById('app').innerHTML = getText() + drawButton() + drawResultsContainer();
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

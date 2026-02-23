@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        let numberList = [1, 4, 5, 2, 1]
+
+        function findHighestPair(numberList) {
+            const num = {};
+            let number = 0;            
+
+            for(let count of numberList) {
+                num[count] = (num[count] || 0) + 1;
+            }
+
+            let highest = 0;
+            for(let count in num) {
+                if(num[count] >= 2) {
+                    highest = Math.max(highest, Number(count));
+                }
+            }
+           
+
+            return highest * 2;         
+
+        }
+
+        console.log(findHighestPair(numberList));
+
+        function updateView() {
+            document.getElementById('app').innerHTML = '';
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

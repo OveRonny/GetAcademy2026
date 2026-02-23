@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            display: grid;
+            grid-template-columns: repeat(3, 60px);
+            gap: 5px;
+            width: max-content;
+        }
+
+        .tile {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: lightblue;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .empty {
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        let numbers = [1, 2, 5, 7, null, 3, 4, 8, 6];
+        function drawBoard() {
+            let html = "";
+            for (let i = 0; i < numbers.length; i++) {
+                if (numbers[i] === null) {
+                    html += `<div class="tile empty"></div>`;
+                } else {
+                    html += `<div class="tile" onclick="moveTile(${i})">${numbers[i]}</div>`;
+                }
+            }
+
+            return html;
+        }
+
+        function isNextToBlank(index) {
+            let emptyIndex = numbers.indexOf(null);
+           
+            if (index - 3 === emptyIndex) return true;          
+            if (index + 3 === emptyIndex) return true;           
+            if (index % 3 !== 0 && index - 1 === emptyIndex) return true;           
+            if (index % 3 !== 2 && index + 1 === emptyIndex) return true;
+
+            return false;
+        }
+
+        function moveTile(index) {
+            if (isNextToBlank(index)) {
+                let emptyIndex = numbers.indexOf(null);
+                [numbers[index], numbers[emptyIndex]] = [numbers[emptyIndex], numbers[index]];
+               updateView();
+            }
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML = drawBoard();
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

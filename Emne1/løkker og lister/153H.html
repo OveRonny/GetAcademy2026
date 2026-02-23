@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        let numberList = [1, 2, 2, 3, 4, 4, 1, 1]
+
+        function getNumber(numberList) {
+            const num = {};
+            let maxCount = 0;
+            let numberCount = null;
+
+            for(let number of numberList) {
+                num[number] = (num[number] ?? 0) + 1;
+
+                if(num[number] > maxCount) {
+                    maxCount = num[number];
+                    numberCount = number;
+                }
+            }
+
+            return numberCount;
+
+        }
+
+        console.log(getNumber(numberList));
+
+    
+    </script>
+</body>
+
+</html>

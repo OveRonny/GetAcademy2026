@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        let numberList = [1, 2, 2, 3, 4, 4, 1, 4, 4]
+
+        function createFrequent(numberList) {
+            const countNumber = {};
+
+            for (let number of numberList) {
+                if (number in countNumber) {
+                    countNumber[number]++;
+                } else {
+                    countNumber[number] = 1;
+                }
+            }
+
+            return countNumber;
+
+        }
+
+        console.log(createFrequent(numberList))
+
+        function createFrequent2(numberList) {
+            const maxNumber = Math.max(...numberList);
+            const countNumber = new Array(maxNumber + 1).fill(0);
+
+            for (let number of numberList) {
+                countNumber[number]++;
+            }
+
+            return countNumber;
+        }
+       
+        console.log(createFrequent2(numberList));
+
+    </script>
+</body>
+
+</html>

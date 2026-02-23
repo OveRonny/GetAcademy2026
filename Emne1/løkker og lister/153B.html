@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        let numbers = [];
+        for (let i = 1; i <= 130; i++) {
+            numbers.push(i);
+        }
+
+        const pageSize = 10;        
+        let currentPage = 0;
+        let filterType = "all";
+
+        function goToPage(pageIndex) {
+            currentPage = pageIndex;
+            updateView();
+        }
+
+        function skipAndTake(values, pageIndex, pageSize) {
+            let newValues = [];
+            let skipCount = pageIndex * pageSize;
+            let takeCount = pageSize;
+
+            for (let value of values) {
+                skipCount--;
+                if (skipCount >= 0) continue;
+                if (takeCount <= 0) break;
+                takeCount--;
+                newValues.push(value);
+            }
+            return newValues;
+        }
+
+        function setFilter(type) {
+            filterType = type;
+            currentPage = 0; 
+            updateView();
+        }
+
+        function updateView() {
+            let filteredNumbers = numbers;
+            if (filterType === "even") {
+                filteredNumbers = numbers.filter(n => n % 2 === 0);
+            }
+            else if (filterType === "odd") {
+                filteredNumbers = numbers.filter(n => n % 2 !== 0);
+            }
+            let totalPages = Math.ceil(filteredNumbers.length / pageSize);
+            let pageNumbers = skipAndTake(filteredNumbers, currentPage, pageSize);
+
+
+            let html = "";
+            html += `
+                <button onclick="setFilter('all')">Alle</button>
+                <button onclick="setFilter('even')">Partall</button>
+                <button onclick="setFilter('odd')">Oddetall</button>
+                <br><br>
+            `;
+            html += pageNumbers.join(", ");
+            html += "<br><br>";
+
+            for (let i = 1; i < totalPages; i++) {
+                html += `<button onclick="goToPage(${i})" 
+                            style="margin:5px;">
+                            ${i + 1}
+                        </button>`;
+            }
+
+            document.getElementById("app").innerHTML = html;
+        }
+
+
+        updateView();
+
+    </script>
+</body>
+
+</html>

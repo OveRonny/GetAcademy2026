@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        function cryptText(text, key, mode) {
+            let result = "";
+            let alphabet = "ABCDEFGHIJKLMOPQRSTUVWXYZÆØÅ";
+            text = text.toUpperCase();
+
+            for (let char of text) {
+                let index;
+                if (mode === "encrypt") {
+                    index = alphabet.indexOf(char);
+                    result += (index !== -1) ? key[index] : char;
+                } else if (mode === "decrypt") {
+                    index = key.indexOf(char);
+                    result += (index !== -1) ? alphabet[index] : char;
+                }
+            }
+
+            return result;
+        }
+
+        const key = "ÅØÆYUOIEABCDFGHJKLMPQRSTVWXZ";
+
+        function updateView() {
+            document.getElementById('app').innerHTML = cryptText("MUKBU", key, "decrypt") + ' ' + cryptText("TERJE", key, "encrypt")
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

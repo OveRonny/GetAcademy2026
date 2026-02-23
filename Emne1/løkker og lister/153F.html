@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        
+        function createCode() {
+            const bokstaver = "ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".split("");
+
+            for (let i = bokstaver.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [bokstaver[i], bokstaver[j]] = [bokstaver[j], bokstaver[i]];
+            }
+
+            return bokstaver.join("");
+        }
+
+        console.log(createCode());
+
+        function updateView() {
+            document.getElementById('app').innerHTML = '';
+        }
+
+        updateView();
+    </script>
+</body>
+
+</html>

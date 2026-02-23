@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        let numbers = [1, 10, 8, 9, 2];
+        let numbers2 = [1, 2, 3, 4, 5];
+
+        function isSorted(arr) {
+            for (let i = 0; i < arr.length - 1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        function updateView() {
+            document.getElementById('app').innerHTML = `
+                numbers: ${isSorted(numbers) ? "true" : "false"}<br>
+                numbers2: ${isSorted(numbers2) ? "true" : "false"}
+            `;
+        }
+
+        updateView();
+
+    </script>
+</body>
+
+</html>
