@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script src="lib.js"></script>
+
+    <script>        
+
+        QUnit.test("Sjekk om epost har . før og etter @", function(assert) {
+            assert.ok((isEmail)("a.b@domain.com"), "Gyldig: punktum før og etter @");
+
+            assert.notOk(isEmail("ab@domain.com"), "Mangler punktum før @");
+            assert.notOk(isEmail("a.b@domaincom"), "Mangler punktum etter @");
+
+        });
+
+    </script>
+</body>
+
+</html>

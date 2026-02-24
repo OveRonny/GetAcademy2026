@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script src="lib.js"></script>
+
+    <script>
+
+        QUnit.test("Sjekk om teksten er en epostadresse (kun @)", function (assert) {
+            
+            assert.ok(isEmail("test@test.no"), "Gyldig e-post med @");           
+
+            assert.notOk(isEmail("test.no"), "Mangler @");
+            assert.notOk(isEmail(""), "Tom streng");
+            assert.notOk(isEmail(null), "Null verdi");
+            assert.notOk(isEmail(undefined), "Undefined verdi");
+            assert.notOk(isEmail(12345), "Ikke en streng");
+
+        });
+
+    </script>
+</body>
+
+</html>
